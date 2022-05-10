@@ -8,7 +8,7 @@ import { Container } from "./styles";
 export function TransactionTable() {
     const {transactions} = useTransactions();
     function apagarTudo() {
-        api.delete('/transactions');
+        api.post('/transactions/deleteAll');
     }
     return (
         <Container>
@@ -41,11 +41,13 @@ export function TransactionTable() {
                    ))}
                 </tbody>
             </table>
-            <ContentDestroy>
-                <button type="button" onClick={apagarTudo}>
-                    Apagar Tudo
-                </button>
-            </ContentDestroy>
+            { transactions.length > 0 && (
+                <ContentDestroy>
+                    <button type="button" onClick={apagarTudo}>
+                        Apagar Tudo
+                    </button>
+                </ContentDestroy>
+            )}
         </Container>
     )
 }
